@@ -30,9 +30,9 @@ addons:
     project:
       name: "Chicago/opengrid"
       description: "Build submitted via Travis CI"
-    notification_email: developers@cityofchicago.org
-    build_command_prepend: ""
-    build_command:   ""
+    notification_email: himani.ravella@cityofchicago.org
+    build_command_prepend: ./configure
+    build_command:   make
     branch_pattern: coverity_scan
 after_success:
     - jscoverage lib lib-cov
