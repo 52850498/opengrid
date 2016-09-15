@@ -16,6 +16,24 @@ script:
     - gulp release
     
 #himani test    
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "BXp22u6pDTEu0RESvQJOayIPk9/Ctv0oOESr09IJbyJtTi55Iw6RQMvkbHw9Pbob2h2GouZi/vZr1YtJmP+GR4c3SlNm0IHc3q/WwyFhD7DGOSGiRMO69gvhHzZazrRktYxHM145DtBFBd7/d8rJY0vQLDBHvvrDcSW5R6IdJgMvQAy3z17una0jOvcc80P45RoPwCABh2+JKqVVcmBb6eWMyIeUpGEioTAzUIoUqexTHKIMuxlX9cf5qSVYccZ3KnD7mnLYnDScaaP9+HsJXC1920acx3XkBf4DEc4C/Ye+e33s57hGItTh973NTug7I9iBswA35OF8ghAK9r7qOERtq01Hl5M4+32/ovXjmFjIQgBPhmEkJIzz9l6ueJpWYKwrL1XXZo72Grx08bNBvlPFXbHUr8VMDXmH6JfflhRH7oMPuOmzjb1pWodtzR1VSFK21WuexDUixuwb1oUuuTgzWwNHYMLn4KG+6Gp1gAF4QPHqBRGJljrP/4fqX97ZKgol0TN4KIfAMaclqxVbcsIPAvw0h7dEGZPs2BbIiXrqoqEZsNaGOCgnm3LPQeOJ2yuX7sGz8CLx/FVxYvZSg1puqiafp0hQCm1q7rRWxH79gfx+WiAYsIpd9IrOlBJ0lgDZOltubQFtmZ/5Kcpm5EQZeOkuNJ2DFEBY60W1fIw="
+
+before_install:
+      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "Chicago/opengrid"
+      description: "Build submitted via Travis CI"
+    notification_email: developers@cityofchicago.org
+    build_command_prepend: ""
+    build_command:   ""
+    branch_pattern: coverity_scan
 after_success:
     - jscoverage lib lib-cov
     - gulp test-coveralls | ./node_modules/coveralls/bin/coveralls.js
