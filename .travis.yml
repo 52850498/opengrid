@@ -4,18 +4,6 @@ warnings_are_errors: true
 
 node_js:
     - "0.12"
-
-install:
-    - npm install
-    #added for Coveralls.io integration
-    - npm install -g jscoverage
-    - npm install coveralls --save-dev
-    - npm install mocha-lcov-reporter --save-dev
-
-script:
-    - gulp release
-    
-#himani test    
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
@@ -24,6 +12,15 @@ env:
 
 before_install:
       - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+
+install:
+    - npm install
+    #added for Coveralls.io integration
+    - npm install -g jscoverage
+    - npm install coveralls --save-dev
+    - npm install mocha-lcov-reporter --save-dev
+#himani test    
 
 addons:
   coverity_scan:
@@ -34,6 +31,11 @@ addons:
     build_command_prepend: ./configure
     build_command:   make
     branch_pattern: coverity_scan
+
+script:
+    - gulp release
+    
+
 after_success:
     - jscoverage lib lib-cov
     - gulp test-coveralls | ./node_modules/coveralls/bin/coveralls.js
