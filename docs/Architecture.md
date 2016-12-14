@@ -18,7 +18,7 @@ Plenario quickly ingests data from popular open data portal platforms, Socrata a
 
 ## Plenar.io test service layer
 
-A publicly-available instance of the Plenar.io service layer is at [http://opengrid-service-dev-1134290206.us-west-2.elb.amazonaws.com/opengrid-service/](http://opengrid-service-dev-1134290206.us-west-2.elb.amazonaws.com/opengrid-service/)
+A publicly-available instance of the Plenar.io service layer is at [http://opengrid-service-dev-1134290206.us-west-2.elb.amazonaws.com/opengrid-service/](http://opengrid-service-dev-1134290206.us-west-2.elb.amazonaws.com/opengrid-service/). The authentication is `User: NoAuth` and `Pass: NoAuth`.
 
 Use this end-point to test any changes you have made to the OpenGrid application that relies on Plenario, but does not require the setup of the service layer.
 
